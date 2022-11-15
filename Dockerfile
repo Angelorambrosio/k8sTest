@@ -7,7 +7,7 @@ RUN git clone https://gitlab.com/angelorambrosio/k8stest
 WORKDIR /tmp/dockerTest
 RUN sh ./mvnw clean
 RUN sh ./mvnw package -Pprod
-RUN cp target/dockerTest.jar dockerTest.jar
+RUN cp target/k8sTest-1.0-SNAPSHOT.jar k8sTest-1.0-SNAPSHOT.jar
 
 FROM adoptopenjdk/openjdk11:jre-11.0.16.1_1
 WORKDIR /opt

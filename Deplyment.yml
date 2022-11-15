@@ -1,0 +1,44 @@
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wpprova
+spec:
+  selector:
+    matchLabels:
+      app: wpprova
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wpprova
+        tier: frontend
+    spec:
+      containers:
+        - name: wordpress
+          image: bitnami/wordpress:latest
+          env:
+            - name: MARIADB_HOST
+              value: mariadb
+            - name: MARIADB_PORT
+              value: "3306"
+            - name: WORDPRESS_DATABASE_USER
+              value: wordpressprova
+            - name: WORDPRESS_DATABASE_NAME
+              value: wordpressprova
+            - name: WORDPRESS_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: password
+            - name: WORDPRESS_USERNAME
+              value: admin
+            - name: WORDPRESS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: password
+            - name: WORDPRESS_BLOG_NAME
+              value: wpProva
