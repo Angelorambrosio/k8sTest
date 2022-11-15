@@ -13,4 +13,4 @@ FROM adoptopenjdk/openjdk11:jre-11.0.16.1_1
 WORKDIR /opt
 COPY --from=build /tmp/k8stest/k8sTest-1.0-SNAPSHOT.jar .
 EXPOSE 5000
-ENTRYPOINT ["java","-jar","/dockerTest.jar"]
+ENTRYPOINT ["java","-jar","/k8sTest-1.0-SNAPSHOT.jar"]
